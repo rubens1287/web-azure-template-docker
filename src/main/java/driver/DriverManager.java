@@ -1,15 +1,16 @@
 
 package driver;
 
+import azure.model.attachment.Attachment;
 import com.github.javafaker.Faker;
 import config.Configuration;
-import report.Report;
 import cucumber.api.Scenario;
 import org.aeonbits.owner.ConfigCache;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.util.Collection;
 import java.util.Locale;
 
 public class DriverManager {
@@ -18,6 +19,7 @@ public class DriverManager {
     private static ThreadLocal<Scenario> scenario = new ThreadLocal<>();
     public static final Configuration configuration = ConfigCache.getOrCreate(Configuration.class);
     public static Faker faker = new Faker(new Locale(configuration.faker()));
+    public static Collection<Attachment> attachments;
 
     public static WebDriver getDriver() {
         return  driver.get();
@@ -38,7 +40,7 @@ public class DriverManager {
 
     public static void quit(Scenario scenario) {
         if (scenario.isFailed()) {
-            Report.takeScreenShot();
+            attachments.add(new Attachment("Evidencia do erro apresentado na execução"));
         }
         DriverManager.driver.get().quit();
     }

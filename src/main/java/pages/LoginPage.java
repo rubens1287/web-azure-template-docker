@@ -1,9 +1,9 @@
 package pages;
 
+import azure.model.attachment.Attachment;
 import driver.DriverManager;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
-import report.Report;
 import support.Action;
 import support.Verifications;
 
@@ -26,20 +26,20 @@ public class LoginPage extends DriverManager implements CommonTestingType {
 
     public void acessaAplicacao(){
         getDriver().get(configuration.url());
-        Report.takeScreenShot();
+        attachments.add(new Attachment());
         log.info("Acesso a aplicacao efetuado com sucesso");
     }
 
     public void executaLogin(HashMap data){
         Action.setText(txtUsuario,data.get("usuario"));
         getDriver().findElement(txtSenha).sendKeys((CharSequence) data.get("senha"));
-        Report.takeScreenShot();
+        attachments.add(new Attachment());
         Action.clickOnElement(btnEntrar);
         log.info("Login na aplicacao efetuado com sucesso");
     }
 
     public boolean isErrorMsg(){
-        Report.takeScreenShot();
+        attachments.add(new Attachment());
         return Verifications.verifyElementIsClickable(lblErrorMsg);
     }
 

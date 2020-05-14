@@ -19,12 +19,14 @@ Requisitos de software e hardware necessários para executar este projeto de aut
 
 | Diretório                    	| finalidade       	                                                                                        | 
 |------------------------------	|---------------------------------------------------------------------------------------------------------- |
+| src\main\java\azure 			| Responsável por enviar os resultados para o test management do Azure Devops                               |
 | src\main\java\config 			| Interface com as propriedades dos arquivos de ambiente 'Properties'                                       |
 | src\main\java\data    		| Reponsável por ler arquivos yaml file e retonar objeto HashMap com os valores dos campos                  |
 | src\main\java\dates 			| Metodos de suporte para trabalhar com datas                                                              	|
+| src\main\java\documents		| Responsável gerar CPFs validos sintéticos                                                             	|
 | src\main\java\driver 			| Responsável por fabricar os drivers para rodar local e remoto para varios navegadores                    	|
 | src\main\java\pages			| Local onde deve ser criado as pages objects para facilitar a manutenção do projeto                       	|
-| src\main\java\report			| Metodo responsável pela criação de screenshot anexada no Report Alure                                		|
+| src\main\java\model			| Responsável por organizar os objetos modelos utilizado no suporte dos scripts de teste               		|
 | src\main\java\support			| Metodos de suporte a interação com os elementos web fazendo ações de click e esperas explicitas          	|
 | src\main\resources\conf	    | Arquivos de configuração segregados por ambiente                                                        	|
 | src\test\java\hooks          	| Metodos que executam antes e depois de cada teste (@Before, @After)                                   	|
@@ -62,13 +64,6 @@ Com o prompt de comando acesse a pasta do projeto, onde esta localizado o arquiv
 mvn clean test
 ```
 
-## COMANDO PARA GERAR EVIDÊNCIAS EM HTML (ALLURE)
-
-Com o prompt de comando acesse a pasta do projeto, onde esta localizado o arquivo pom.xml, execute o comando abaixo para gerar as evidências em HTML
-
-```
-mvn allure:report
-```
 
 ## MULTIPLOS COMANDOS 
 
@@ -77,7 +72,7 @@ sendo assim você pode escolher uma determinada tag que se deseja executar do cu
 podendo escolher também a massa de dados que irá utilizar e juntamente aplicar o linha de comando para gerar o report HTML.
 
 ```
-mvn clean test -Dcucumber.options="--tags @dev" -Denv=des allure:report
+mvn clean test -Dcucumber.options="--tags @dev" -Denv=des -Dbrowser=chrome
 ```
 
 ## TESTES CONTINUOS

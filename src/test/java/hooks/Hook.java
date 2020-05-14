@@ -10,6 +10,8 @@ import cucumber.api.java.Before;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
 
+import java.util.ArrayList;
+
 
 @Log4j2
 public class Hook extends DriverManager {
@@ -18,6 +20,7 @@ public class Hook extends DriverManager {
     public void init(Scenario scenario) {
 
         DriverManager.setScenario(scenario);
+        attachments = new ArrayList<>();
         log.info(String.format("TESTE INICIADO: %s",scenario.getName()));
         ConfigFactory.setProperty("env", System.getProperty("env"));
         WebDriver driver = DriverFactory.createInstance(System.getProperty("browser"));

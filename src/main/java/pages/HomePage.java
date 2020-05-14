@@ -1,9 +1,9 @@
 package pages;
 
+import azure.model.attachment.Attachment;
 import driver.DriverManager;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
-import report.Report;
 import support.Verifications;
 
 @Log4j2
@@ -13,7 +13,7 @@ public class HomePage extends DriverManager implements CommonTestingType {
 
     @Override
     public boolean isPresent() {
-        Report.takeScreenShot();
+        attachments.add(new Attachment());
         return Verifications.verifyElementIsVisible(lblBemVindo);
     }
 
