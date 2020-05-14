@@ -18,7 +18,7 @@ steps:
   displayName: 'Maven pom.xml'
   inputs:
     mavenPomFile: 'pom.xml'
-    goals: 'clean test -Dreport=cucumber -Denv=uat -Dbrowser=chrome'
+    goals: 'clean test -Denv=uat -Dbrowser=chrome'
     testResultsFiles: 'target/xml-junit/*.xml'
     testRunTitle: 'Functional Testing'
 
