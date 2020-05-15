@@ -15,6 +15,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import zalenium.Zalenium;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -27,9 +28,8 @@ public class RemoteDriverManager implements IDriver {
         RemoteWebDriver remoteWebDriver = null;
         Configuration configuration = ConfigCache.getOrCreate(Configuration.class);
         try {
-            // attachment composition of the target grid address and port
             String gridURL = String.format("http://%s:%s/wd/hub", configuration.gridUrl(), configuration.gridPort());
-
+            Zalenium.waitToBeReady(gridURL);
             remoteWebDriver = new RemoteWebDriver(new URL(gridURL), getCapability(browser));
         } catch (MalformedURLException e) {
             log.error("Grid URL is invalid or Grid is not available");

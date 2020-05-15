@@ -21,7 +21,7 @@
 		<webdrivermanager.version>3.8.1</webdrivermanager.version>
 		<log4j.version>2.13.0</log4j.version>
 
-		<env>des</env> <!-- des, prod ou uat-->
+		<env>uat</env> <!-- des, prod ou uat-->
 		<browser>chrome</browser> <!-- chrome, edge, firefox, iexplorer, opera, safari-->
 	</properties>
 
