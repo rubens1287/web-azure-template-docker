@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>br.com.gft</groupId>
-	<artifactId>web-template-project</artifactId>
+	<artifactId>web-project-template</artifactId>
 	<version>1.0</version>
 
 	<properties>
@@ -21,7 +21,7 @@
 		<webdrivermanager.version>3.8.1</webdrivermanager.version>
 		<log4j.version>2.13.0</log4j.version>
 
-		<env>uat</env> <!-- des, prod ou uat-->
+		<env>des</env> <!-- des, hom ou qa-->
 		<browser>chrome</browser> <!-- chrome, edge, firefox, iexplorer, opera, safari-->
 	</properties>
 
@@ -47,7 +47,6 @@
 
 	<dependencies>
 
-
         <!-- Rest Assured para teste de Back-End -->
         <dependency>
             <groupId>io.rest-assured</groupId>
@@ -55,13 +54,26 @@
             <version>3.1.1</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
+		<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>mssql-jdbc</artifactId>
+			<version>6.1.0.jre8</version>
+		</dependency>
+
+		<!--Jooq para leitura de dados do banco de dados -->
+		<dependency>
+			<groupId>org.jooq</groupId>
+			<artifactId>jooq</artifactId>
+			<version>3.13.2</version>
+		</dependency>
+
 		<!--Jackson para leitura de dados de arquivo yaml file -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
 			<artifactId>jackson-dataformat-yaml</artifactId>
 			<version>${jackson.version}</version>
 		</dependency>
-
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.datatype</groupId>
@@ -87,6 +99,7 @@
 			<artifactId>selenium-server</artifactId>
 			<version>${selenium.version}</version>
 		</dependency>
+
 
 		<!--Java Faker  Geracao de dados sinteticos -->
 		<dependency>

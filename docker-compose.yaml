@@ -1,0 +1,43 @@
+# Usage:
+#   docker-compose up --force-recreate
+#   docker-compose stop
+version: '3'
+
+services:
+  #--------------#
+  zalenium:
+    image: "dosel/zalenium:latest"
+    container_name: zalenium
+    hostname: zalenium
+    tty: true
+    volumes:
+      - /tmp/videos:/home/seluser/videos
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 4444:4444
+    command: >
+      start --desiredContainers 2
+            --maxDockerSeleniumContainers 2
+            --screenWidth 1920 --screenHeight 1080
+            --timeZone "Europe/Berlin"
+            --videoRecordingEnabled false
+            --sauceLabsEnabled false
+            --browserStackEnabled false
+            --testingBotEnabled false
+            --cbtEnabled false
+            --lambdaTestEnabled false
+            --startTunnel false
+    environment:
+      - PULL_SELENIUM_IMAGE=true
+  testes:
+      build: .
+      container_name: funcional
+      command: mvn clean test -Denv=qa
+      network_mode: host
+      depends_on:
+         - zalenium
+  start_dependencies:
+      image: dadarek/wait-for-dependencies
+      depends_on:
+        - zalenium
+      command: zalenium:4444

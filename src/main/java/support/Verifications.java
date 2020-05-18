@@ -1,6 +1,6 @@
 package support;
 
-import driver.DriverManager;
+import core.driver.DriverManager;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;

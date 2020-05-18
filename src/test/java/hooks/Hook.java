@@ -1,14 +1,15 @@
 package hooks;
 
-import azure.controller.RunTestController;
-import driver.DriverFactory;
-import driver.DriverManager;
+import core.azure.controller.RunTestController;
+import core.driver.DriverFactory;
+import core.driver.DriverManager;
 import lombok.extern.log4j.Log4j2;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.ArrayList;
 
@@ -26,16 +27,16 @@ public class Hook extends DriverManager {
         WebDriver driver = DriverFactory.createInstance(System.getProperty("browser"));
         driver.manage().window().maximize();
         DriverManager.setDriver(driver);
+
     }
 
     @After
     public void end(Scenario scenario){
-
-        RunTestController runTestController = new RunTestController();
-        runTestController.runTestCase(scenario);
         DriverManager.quit(scenario);
         log.info(String.format("TESTE FINALIZADO: %s",scenario.getName()));
         log.info(String.format("TESTE STATUS: %s",scenario.getStatus()));
+        RunTestController runTestController = new RunTestController();
+        runTestController.runTestCase(scenario);
     }
 
 }

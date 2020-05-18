@@ -11,17 +11,17 @@ steps:
    docker pull dosel/zalenium
   displayName: 'pull imagens docker'
 
-- script: 'docker run --rm -ti --name zalenium -d -p 4444:4444 -e PULL_SELENIUM_IMAGE=true -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/videos:/home/seluser/videos --privileged dosel/zalenium start'
+- script: 'docker run --rm -ti --name grid -d -p 4444:4444 -e PULL_SELENIUM_IMAGE=true -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/videos:/home/seluser/videos --privileged dosel/zalenium start'
   displayName: 'run container'
 
 - task: Maven@3
   displayName: 'Maven pom.xml'
   inputs:
     mavenPomFile: 'pom.xml'
-    goals: 'clean test -Denv=uat -Dbrowser=chrome'
+    goals: 'clean test -Denv=qa -Dbrowser=chrome'
     testResultsFiles: 'target/xml-junit/*.xml'
     testRunTitle: 'Functional Testing'
 
-- script: 'docker stop zalenium'
+- script: 'docker stop grid'
   displayName: 'stop containers'
   condition: always()
