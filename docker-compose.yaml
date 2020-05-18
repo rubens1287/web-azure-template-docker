@@ -29,9 +29,9 @@ services:
             --startTunnel false
     environment:
       - PULL_SELENIUM_IMAGE=true
-  testes:
+  teste:
       build: .
-      container_name: funcional
+      container_name: web-template-azure_teste
       command: mvn clean test -Denv=qa
       network_mode: host
       depends_on:
