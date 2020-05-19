@@ -69,7 +69,7 @@ Abaixo está a lista de frameworks utilizados nesse projeto
 A integração com test managment do azure, e feito atravês do arquivo de properties <b>"src\main\resources\azure.properties"</b> 
 onde você deve informa os parametros abaixo;
 
-```
+```properties
 # host do azure
 host.azure = <Host do Servido>
 
@@ -82,7 +82,7 @@ personal.access.token = <Token do usuário do azure devops>
 
 Para concluir a configuração, você deve aplicar as tags reservadas no arquivo de features do cucumber;
 
-```
+```gherkin
 @PlanId=<Id do plano de teste no azure>
 @SuiteId=<Id do suite de teste no azure>
 @TestId=<Id do caso de teste no azure>
@@ -90,7 +90,7 @@ Para concluir a configuração, você deve aplicar as tags reservadas no arquivo
 
 Exemplo:
 
-```
+```gherkin
 # language: pt
 # charset: UTF-8
 
@@ -203,6 +203,6 @@ Os logs de execução gerados pelo Log4j2 ficam alocados na pasta target/log
 
 ## CARACTERISTICAS ESPECIAIS
 
-* Download automatico dos binários dos drivers para diferentes tipos de versões de navegadores e sistema operacional.
+* Download automatíco dos binários dos drivers para diferentes tipos de versões de navegadores e sistema operacional.
 * Segregação de massa por ambiente via arquivos yaml file.
 * Segregação das configurações de ambiente via arquivo properties file.
