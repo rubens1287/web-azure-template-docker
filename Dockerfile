@@ -4,7 +4,7 @@
 #Contruir imagem
 #    docker build -t nome-projeto -f ./Dockerfile .
 #Rodar os testes
-#    docker run --network="host" conectcar mvn clean test -Denv=qa
+#    docker run --network="host" nome-projeto mvn clean test -Denv=qa
 FROM maven:3.5.3-jdk-8-alpine
 # copy the project files
 COPY ./pom.xml ./pom.xml

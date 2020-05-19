@@ -17,6 +17,4 @@ public class HomePage extends DriverManager implements CommonTestingType {
         attachments.add(new Attachment());
         return Verifications.verifyElementIsVisible(lblBemVindo);
     }
-
-
 }

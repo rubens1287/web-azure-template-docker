@@ -178,19 +178,19 @@ Configurações necessárias para rodar o pipeline no Azure Devops
 * Agent azure devops (Linux, Windows ou Mac)
 * Checkout do código
 * Install Docker 17.09.0-ce
-* docker prepared environment
+* Task (Command line) docker prepared environment
 ```dockerfile
     docker run --rm -ti --name zalenium -d -p 4444:4444 -e PULL_SELENIUM_IMAGE=true -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/videos:/home/seluser/videos --privileged dosel/zalenium start
 ```
-* docker build project
+* Task (Command line) docker build project
 ```dockerfile
     docker build -t <Nome do Projeto> -f ./Dockerfile .
 ```
-* docker run testing
+* Task (Command line) docker run testing
 ```dockerfile
     docker run --network="host" <Nome do Projeto> mvn clean test -Denv=qa
 ```
-* docker stop environment
+* Task (Command line) docker stop environment
 ```dockerfile
     docker stop zalenium
 ```
