@@ -31,7 +31,7 @@ services:
       - PULL_SELENIUM_IMAGE=true
   teste:
       build: .
-      container_name: web-template-azure_teste
+      container_name: web-project-template-multi-cloud_teste
       command: mvn clean test -Denv=qa
       network_mode: host
       depends_on:

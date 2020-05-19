@@ -1,11 +1,17 @@
 # PROJETO MODELO PARA TESTE WEB 
 
+---
+
 Projeto desenvolvido com proposito de ser um modelo base para teste de interface web
+
+
 
 ## PRÉ-REQUISITOS
 
-Requisitos de software e hardware necessários para executar este projeto de automação
+---
+Requisitos de software necessários para o ambiente de desenvolvimento:
 
+*   Docker 
 *   Java 1.8 SDK
 *   Maven 3.5.*
 *   Navegador Web (Chrome, Opera, FireFox, Edge ou Safari)
@@ -14,9 +20,10 @@ Requisitos de software e hardware necessários para executar este projeto de aut
     * Cumcuber for java
     * Lombok
     * Ideolog 
-
+    
 ## ESTRUTURA DO PROJETO
 
+---
 | Diretório                    	| finalidade       	                                                                                        | 
 |------------------------------	|---------------------------------------------------------------------------------------------------------- |
 | src\main\java\core\azure 		| Responsável por enviar os resultados para o test management do Azure Devops                               |
@@ -26,7 +33,7 @@ Requisitos de software e hardware necessários para executar este projeto de aut
 | src\main\java\core\documents	| Responsável gerar CPFs sintéticos e validos                                                              	|
 | src\main\java\core\driver 	| Responsável por fabricar os drivers para rodar local e remoto para varios navegadores                    	|
 | src\main\java\core\strings 	| Responsável por fazer tratamentos em string                                                             	|
-| src\main\java\core\zalenium 	| Responsável por interagir com o zalenium                                                               	|
+| src\main\java\core\grid    	| Responsável por interagir com o grid do selenium                                                         	|
 | src\main\java\pages			| Local onde deve ser criado as pages objects para facilitar a manutenção do projeto                       	|
 | src\main\java\model			| Responsável por organizar os objetos modelos utilizado no suporte dos scripts de teste               		|
 | src\main\java\support			| Metodos de suporte a interação com os elementos web fazendo ações de click e esperas explicitas          	|
@@ -63,6 +70,8 @@ Abaixo está a lista de frameworks utilizados nesse projeto
 
 ## INTEGRAÇÃO COM AZURE DEVOPS
 
+---
+
 A integração com test managment do azure, e feito atravês do arquivo de properties <b>"src\main\resources\azure.properties"</b> 
 onde você deve informa os parametros abaixo;
 
@@ -78,7 +87,6 @@ personal.access.token = <Token do usuário do azure devops>
 ```
 
 Para concluir a configuração, você deve aplicar as tags reservadas no arquivo de features do cucumber;
-
 
 ```
 @PlanId=<Id do plano de teste no azure>
@@ -103,6 +111,21 @@ Funcionalidade: Login
     Quando eu efetuar o login com credencias validas
     Entao sera apresentado a tela do menu principal
 ```
+
+Por fim, você deve chamar o objeto responsável para enviar os resultados para o Test Plan do Azure
+
+
+```java
+ @After
+    public void end(Scenario scenario){
+        DriverManager.quit(scenario);
+        log.info(String.format("TESTE FINALIZADO: %s",scenario.getName()));
+        log.info(String.format("TESTE STATUS: %s",scenario.getStatus()));
+        RunTestController runTestController = new RunTestController();
+        runTestController.runTestCase(scenario);
+    }
+```
+
 
 ## COMANDO PARA EXECUTAR OS TESTES
 
