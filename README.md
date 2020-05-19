@@ -125,7 +125,7 @@ Exemplo:
     }
 ```
 
-## COMANDO PARA EXECUTAR OS TESTES
+## COMANDOS PARA EXECUTAR OS TESTES
 
 Com o prompt de comando acesse a pasta do projeto, onde esta localizado o arquivo pom.xml, execute o comando abaixo para rodar os testes automatizados.
 
@@ -155,7 +155,7 @@ Configure o arquivo <b>"docker-compose.yml"</b>
   teste:
       build: .
       container_name: <nome do projeto no artifactId do pom>_teste
-      command: <Comando de execução do projeto, vide item [COMANDO PARA EXECUTAR OS TESTES](#comando-para-executar-os-testes)>
+      command: <Comando de execução do projeto, vide item (COMANDOS PARA EXECUTAR OS TESTES)>
       network_mode: host
       depends_on:
          - zalenium
