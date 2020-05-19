@@ -64,8 +64,6 @@ Abaixo está a lista de frameworks utilizados nesse projeto
 
 ## INTEGRAÇÃO COM AZURE DEVOPS
 
----
-
 A integração com test managment do azure, e feito atravês do arquivo de properties <b>"src\main\resources\azure.properties"</b> 
 onde você deve informa os parametros abaixo;
 
@@ -109,8 +107,8 @@ Funcionalidade: Login
 Por fim, você deve chamar o objeto responsável para enviar os resultados para o Test Plan do Azure
 
 ```java
-RunTestController runTestController = new RunTestController();
-runTestController.runTestCase(scenario);
+    RunTestController runTestController = new RunTestController();
+    runTestController.runTestCase(scenario);
 ```
 
 Exemplo: 
@@ -177,13 +175,12 @@ Configurações necessárias para rodar o pipeline no Azure Devops
    
 ### ETAPAS
 
+* Agent azure devops (Linux, Windows ou Mac)
 * Checkout do código
-* Agent azure devops
-* Download do Zalenium como infraestrutura 
-* Execução dos containers do Zalenium
-* Execução dos testes
-* Upload do arquivo de resultados junit.xml para Azure
-* Encerramento da infraestrutura do Zalenium
+* docker prepared environment
+* docker build project
+* docker run testing
+* docker stop environment
 
 
 ## EVIDÊNCIAS
