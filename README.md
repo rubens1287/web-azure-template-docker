@@ -1,4 +1,4 @@
-# PROJETO MODELO PARA TESTE WEB 
+# PROJETO TEMPLATE PARA TESTE WEB 
 
 Projeto desenvolvido com proposito de ser um modelo base para teste de interface web
 
