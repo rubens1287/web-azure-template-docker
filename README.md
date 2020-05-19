@@ -183,11 +183,11 @@ Configurações necessárias para rodar o pipeline no Azure Devops
 ```
 * docker build project
 ```dockerfile
-    docker build -t web-project-template-multi-cloud -f ./Dockerfile .
+    docker build -t <Nome do Projeto> -f ./Dockerfile .
 ```
 * docker run testing
 ```dockerfile
-    docker run --network="host" web-project-template-multi-cloud mvn clean test -Denv=qa
+    docker run --network="host" <Nome do Projeto> mvn clean test -Denv=qa
 ```
 * docker stop environment
 ```dockerfile
