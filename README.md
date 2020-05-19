@@ -1,14 +1,10 @@
 # PROJETO MODELO PARA TESTE WEB 
 
----
-
 Projeto desenvolvido com proposito de ser um modelo base para teste de interface web
-
-
 
 ## PRÉ-REQUISITOS
 
----
+
 Requisitos de software necessários para o ambiente de desenvolvimento:
 
 *   Docker 
@@ -23,7 +19,6 @@ Requisitos de software necessários para o ambiente de desenvolvimento:
     
 ## ESTRUTURA DO PROJETO
 
----
 | Diretório                    	| finalidade       	                                                                                        | 
 |------------------------------	|---------------------------------------------------------------------------------------------------------- |
 | src\main\java\core\azure 		| Responsável por enviar os resultados para o test management do Azure Devops                               |
@@ -49,7 +44,6 @@ Requisitos de software necessários para o ambiente de desenvolvimento:
 Faça o donwload do template no repositório de código para utilizar no seu projeto em especifico, 
 feito isso, fique a vontande para usufruir dos recursos disponíveis e 
 também customizar de acordo com sua necessidade. 
-
 
 ## FRAMEWORKS UTILIZADOS
 
@@ -114,7 +108,12 @@ Funcionalidade: Login
 
 Por fim, você deve chamar o objeto responsável para enviar os resultados para o Test Plan do Azure
 
+```java
+RunTestController runTestController = new RunTestController();
+runTestController.runTestCase(scenario);
+```
 
+Exemplo: 
 ```java
  @After
     public void end(Scenario scenario){
@@ -125,7 +124,6 @@ Por fim, você deve chamar o objeto responsável para enviar os resultados para 
         runTestController.runTestCase(scenario);
     }
 ```
-
 
 ## COMANDO PARA EXECUTAR OS TESTES
 
@@ -144,6 +142,23 @@ podendo escolher também a massa de dados que irá utilizar e juntamente aplicar
 
 ```
 mvn clean test -Dcucumber.options="--tags @dev" -Denv=des -Dbrowser=chrome
+```
+
+## RODANDO OS TESTE EM CONTAINER (DOCKER)
+
+O projeto tem a capacidade de criar a infraestrutura de ambiente para executar os testes de forma autonoma, isso
+significa que tudo que é necessário para a execução é criado dentro de containers.
+
+Configure o arquivo <b>"docker-compose.yml"</b>
+
+```yaml
+  teste:
+      build: .
+      container_name: <nome do projeto no artifactId do pom>_teste
+      command: <Comando de execução do projeto, vide item [COMANDO PARA EXECUTAR OS TESTES](#comando-para-executar-os-testes)>
+      network_mode: host
+      depends_on:
+         - zalenium
 ```
 
 ## TESTES CONTINUOS
