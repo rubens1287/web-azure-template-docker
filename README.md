@@ -178,25 +178,29 @@ Configurações necessárias para rodar o pipeline no Azure Devops
 * Agent azure devops (Linux, Windows ou Mac)
 * Checkout do código
 * docker prepared environment
+```dockerfile
+    docker run --rm -ti --name zalenium -d -p 4444:4444 -e PULL_SELENIUM_IMAGE=true -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/videos:/home/seluser/videos --privileged dosel/zalenium start
+```
 * docker build project
+```dockerfile
+    docker build -t web-project-template-multi-cloud -f ./Dockerfile .
+```
 * docker run testing
+```dockerfile
+    docker run --network="host" web-project-template-multi-cloud mvn clean test -Denv=qa
+```
 * docker stop environment
-
+```dockerfile
+    docker stop zalenium
+```
 
 ## EVIDÊNCIAS
 
 As evidências são enviadas diretamente para o Azure Devops, garantido a centralização dos resultados de teste
 
-Os arquivos com as evidências ténicas ficam localizados na pasta target do projeto, esta pasta só é criada depois da primeira execução.
-
-```
- Json Cucumber: target/json-cucumber-reports/cucumber.json
- Xml Junit: tagert/xml-junit/junit.xml
-```
-
 ## LOG DE EXECUÇÃO
 
-Os logs de execução gerados pelo Log4j2 ficam alocados na pasta target/log
+Os logs de execução gerados pelo Log4j2 ficam disponíveis na build do azure
 
 ## CARACTERISTICAS ESPECIAIS
 
