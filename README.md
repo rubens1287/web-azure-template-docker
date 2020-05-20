@@ -60,6 +60,8 @@ Abaixo está a lista de frameworks utilizados nesse projeto
 | Lombok                     	| Otimização de classes modelos                                                                         	|
 | Log4j2                     	| Responsável pelo Log do projeto                                                                          	|
 | AeonBits          			| Responsável por gerenciar as properties                                                                  	|
+| Mssql-jdbc                    | Conector de banco de dados SQL Server                                                                     |
+| Jooq                          | Criar querys SQL seguras do tipo por meio de sua API fluente                                              |
 
 
 ## INTEGRAÇÃO COM AZURE DEVOPS
