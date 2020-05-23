@@ -8,6 +8,10 @@ steps:
 - script: docker run --rm -ti --name zalenium -d -p 4444:4444 -e PULL_SELENIUM_IMAGE=true -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/videos:/home/seluser/videos --privileged dosel/zalenium start
   displayName: 'docker prepared environment'
 
+- task: Docker@2
+  inputs:
+    containerRegistry: 'service-containers'
+    command: 'login'
 
 - script: docker run --network="host" -v "$PWD/target:/usr/target" lobo10.azurecr.io/testes-exemplo:latest mvn test -Denv=qa
   displayName: 'docker run testing'
