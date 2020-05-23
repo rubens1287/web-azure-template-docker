@@ -8,7 +8,6 @@ Funcionalidade: Login
 
   @TestId=7
   @smoke
-  @funcional
   @aceitacao
    Cenario: CT001 - Login - Executar login com valido
     Dado eu estou na pagina de login
@@ -16,7 +15,6 @@ Funcionalidade: Login
     Entao sera apresentado a tela do menu principal
 
   @TestId=23
-  @smoke
   @funcional
   @aceitacao
   Cenario:  CT002 - Login - Executar login com invalido
