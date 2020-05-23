@@ -11,7 +11,7 @@ steps:
 - script: "docker build -t testes -f ./Dockerfile ."
   displayName: 'docker build project'
 
-- script: "docker run --network='host'-v '$PWD/target:/usr/target' testes mvn test -Denv=qa"
+- script: docker run --network="host" -v "$PWD/target:/usr/target" testes mvn test -Denv=qa
   displayName: 'docker run testing'
 
 - script: "docker stop zalenium"
