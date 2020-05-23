@@ -10,7 +10,7 @@ import support.Verifications;
 @Log4j2
 public class HomePage extends DriverManager implements CommonTestingType {
 
-    private By lblBemVindo = By.xpath("//div1[contains(text(),'Bem vindo')]");
+    private By lblBemVindo = By.xpath("//div[contains(text(),'Bem vindo')]");
 
     @Override
     public boolean isPresent() {
