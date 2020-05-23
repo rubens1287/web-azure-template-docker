@@ -118,10 +118,10 @@ Exemplo:
  @After
     public void end(Scenario scenario){
         DriverManager.quit(scenario);
-        log.info(String.format("TESTE FINALIZADO: %s",scenario.getName()));
-        log.info(String.format("TESTE STATUS: %s",scenario.getStatus()));
         RunTestController runTestController = new RunTestController();
         runTestController.runTestCase(scenario);
+        log.info(String.format("TESTE FINALIZADO: %s",scenario.getName()));
+        log.info(String.format("TESTE STATUS: %s",scenario.getStatus()));
     }
 ```
 
