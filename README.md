@@ -190,7 +190,7 @@ Configurações necessárias para rodar o pipeline no Azure Devops
 ```
 * Task (Command line) docker run testing
 ```dockerfile
-    docker run --network="host" <Nome do Projeto> mvn clean test -Denv=qa
+    docker run --network="host" -v "$PWD/target:/usr/target" nome-projeto mvn test -Denv=qa
 ```
 * Task (Command line) docker stop environment
 ```dockerfile
