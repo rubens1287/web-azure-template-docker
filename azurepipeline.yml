@@ -5,16 +5,16 @@ steps:
 - task: DockerInstaller@0
   displayName: 'Install Docker 17.09.0-ce'
 
-- script: "docker run --rm -ti --name zalenium -d -p 4444:4444 -e PULL_SELENIUM_IMAGE=true -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/videos:/home/seluser/videos --privileged dosel/zalenium start"
+- script: docker run --rm -ti --name zalenium -d -p 4444:4444 -e PULL_SELENIUM_IMAGE=true -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/videos:/home/seluser/videos --privileged dosel/zalenium start
   displayName: 'docker prepared environment'
 
-- script: "docker build -t testes -f ./Dockerfile ."
+- script: docker build -t testes -f ./Dockerfile .
   displayName: 'docker build project'
 
 - script: docker run --network="host" -v "$PWD/target:/usr/target" testes mvn test -Denv=qa
   displayName: 'docker run testing'
 
-- script: "docker stop zalenium"
+- script: docker stop zalenium
   displayName: 'docker stop environment'
   condition: always()
 
