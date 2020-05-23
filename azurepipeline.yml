@@ -1,27 +1,26 @@
 pool:
   vmImage: ubuntu-16.04
 
-#Your build pipeline references an undefined variable named ‘Parameters.mavenPOMFile’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
-
 steps:
 - task: DockerInstaller@0
   displayName: 'Install Docker 17.09.0-ce'
 
-- script: |
-   docker pull dosel/zalenium
-  displayName: 'pull imagens docker'
+- script: "docker run --rm -ti --name zalenium -d -p 4444:4444 -e PULL_SELENIUM_IMAGE=true -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/videos:/home/seluser/videos --privileged dosel/zalenium start"
+  displayName: 'docker prepared environment'
 
-- script: 'docker run --rm -ti --name grid -d -p 4444:4444 -e PULL_SELENIUM_IMAGE=true -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/videos:/home/seluser/videos --privileged dosel/zalenium start'
-  displayName: 'run container'
+- script: "docker build -t testes -f ./Dockerfile ."
+  displayName: 'docker build project'
 
-- task: Maven@3
-  displayName: 'Maven pom.xml'
-  inputs:
-    mavenPomFile: 'pom.xml'
-    goals: 'clean test -Denv=qa -Dbrowser=chrome'
-    testResultsFiles: 'target/xml-junit/*.xml'
-    testRunTitle: 'Functional Testing'
+- script: "docker run --network='host'-v '$PWD/target:/usr/target' testes mvn test -Denv=qa"
+  displayName: 'docker run testing'
 
-- script: 'docker stop grid'
-  displayName: 'stop containers'
+- script: "docker stop zalenium"
+  displayName: 'docker stop environment'
   condition: always()
+
+- task: PublishTestResults@2
+  displayName: 'Publish Test Results'
+  inputs:
+    testResultsFiles: 'target/xml-junit/junit.xml'
+    failTaskOnFailedTests: true
+    testRunTitle: 'Testes Automatizados'
