@@ -156,7 +156,7 @@ mvn clean test
 
 Você também pode mesclar a linha de comando maven com options do cucumber, 
 sendo assim você pode escolher uma determinada tag que se deseja executar do cucumber, 
-podendo escolher também a massa de dados que irá utilizar e juntamente aplicar o linha de comando para gerar o report HTML.
+podendo escolher também a massa de dados que irá utilizar por ambiente.
 
 ```
 mvn clean test -Dcucumber.options="--tags @dev" -Denv=des -Dbrowser=chrome
