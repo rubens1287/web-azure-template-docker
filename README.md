@@ -177,6 +177,11 @@ Configurações necessárias para rodar o pipeline no Azure Devops
    
 ### PIPELINE BUILD AND PUBLISH CONTAINER IMAGE
 
+
+Neste seção eu mostro os detalhes de implementação do processo de build do container e publicação, atravês do arquivo yaml file,
+o qual você encontra na raiz do projeto no arquivo <b>build-azure-pipeline.yml</b>.
+
+
 * Checkout do código
 
 ```yaml
@@ -202,6 +207,8 @@ steps:
 * Agent azure devops (Linux, Windows ou Mac)
 * Install Docker 17.09.0-ce
 * Task (Command line) docker prepared environment
+
+Exemplo de linha de comando:
 ```dockerfile
     docker run --rm -ti --name zalenium -d -p 4444:4444 -e PULL_SELENIUM_IMAGE=true -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/videos:/home/seluser/videos --privileged dosel/zalenium start
 ```
@@ -210,10 +217,14 @@ steps:
     * repository: '<Container-Repository>'
 
 * Task (Command line) docker run testing
+
+Exemplo de linha de comando:
 ```dockerfile
     docker run --network="host" -v "$PWD/target:/usr/target" <image-container-name> mvn test -Denv=qa
 ```
 * Task (Command line) docker stop environment
+
+Exemplo de linha de comando:
 ```dockerfile
     docker stop zalenium
 ```
