@@ -175,35 +175,102 @@ Configurações necessárias para rodar o pipeline no Azure Devops
 
 *   Agente com acesso as aplicações da companhia
    
-### ETAPAS
+### PIPELINE BUILD AND PUBLISH CONTAINER IMAGE
+
+* Checkout do código
+
+```yaml
+pool:
+  vmImage: ubuntu-16.04
+
+steps:
+- task: DockerInstaller@0
+  displayName: 'Install Docker 17.09.0-ce'
+
+- task: Docker@2
+  displayName: buildAndPush
+  inputs:
+    containerRegistry: '<Container-Registry>'
+    repository: '<Container-Repository>'
+    tags: |
+     $(Build.BuildId)
+     latest
+```
+
+### CONTINUOUS DELIVERY 
 
 * Agent azure devops (Linux, Windows ou Mac)
-* Checkout do código
 * Install Docker 17.09.0-ce
 * Task (Command line) docker prepared environment
 ```dockerfile
     docker run --rm -ti --name zalenium -d -p 4444:4444 -e PULL_SELENIUM_IMAGE=true -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/videos:/home/seluser/videos --privileged dosel/zalenium start
 ```
-* Task (Command line) docker build project
-```dockerfile
-    docker build -t <Nome do Projeto> -f ./Dockerfile .
-```
+* Task (Docker) Login docker private azure
+    * containerRegistry: '<Container-Registry>'
+    * repository: '<Container-Repository>'
+
 * Task (Command line) docker run testing
 ```dockerfile
-    docker run --network="host" -v "$PWD/target:/usr/target" nome-projeto mvn test -Denv=qa
+    docker run --network="host" -v "$PWD/target:/usr/target" <image-container-name> mvn test -Denv=qa
 ```
 * Task (Command line) docker stop environment
 ```dockerfile
     docker stop zalenium
 ```
 
+* Task (Publish Test Results)
+    * testResultsFiles: 'target/xml-junit/junit.xml'
+    * failTaskOnFailedTests: true
+    * testRunTitle: 'Testes Automatizados'
+ 
+### PIPELINE CONTINUOUS DELIVERY 
+
+```yaml
+pool:
+  vmImage: ubuntu-16.04
+
+steps:
+- task: DockerInstaller@0
+  displayName: 'Install Docker 17.09.0-ce'
+
+- script: 'docker run --rm -ti --name zalenium -d -p 4444:4444 -e PULL_SELENIUM_IMAGE=true -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/videos:/home/seluser/videos --privileged dosel/zalenium start'
+  displayName: 'docker prepared environment'
+
+- task: Docker@2
+  displayName: 'Login docker private azure'
+  inputs:
+    containerRegistry: 'service-containers'
+    command: login
+
+- script: 'docker run --network="host" -v "$PWD/target:/usr/target" <Container-Repository>:latest mvn test -Dcucumber.options="--tags @smoke" -Denv=qa'
+  displayName: 'docker run testing'
+
+- script: 'docker stop zalenium'
+  displayName: 'docker stop zalenium'
+  
+- task: PublishTestResults@2
+  displayName: 'Publish Test Results'
+  inputs:
+    testResultsFiles: 'target/xml-junit/junit.xml'
+    failTaskOnFailedTests: true
+    testRunTitle: 'Testes Automatizados'
+```
+
 ## EVIDÊNCIAS
 
 As evidências são enviadas diretamente para o Azure Devops, garantido a centralização dos resultados de teste
 
+Os arquivos com as evidências técnicas para a integração continua ficam localizados na pasta target do projeto, 
+esta pasta só é criada depois da primeira execução.
+
+```
+ Json Cucumber: target/json-cucumber-reports/cucumber.json
+ Xml Junit: tagert/xml-junit/junit.xml
+```
+
 ## LOG DE EXECUÇÃO
 
-Os logs de execução gerados pelo Log4j2 ficam disponíveis na build do azure
+Os logs de execução gerados pelo Log4j2 ficam disponíveis no console, seja executando localmete ou via uma ferramenta de CI.
 
 ## CARACTERISTICAS ESPECIAIS
 
