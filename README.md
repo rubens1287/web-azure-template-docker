@@ -19,7 +19,7 @@ Requisitos de software necessários para o ambiente de desenvolvimento:
     
 ## ESTRUTURA DO PROJETO
 
-| Diretório                    	| finalidade       	                                                                                        | 
+| Diretório                    	| Finalidade       	                                                                                        | 
 |------------------------------	|---------------------------------------------------------------------------------------------------------- |
 | src\main\java\core\azure 		| Responsável por enviar os resultados para o test management do Azure Devops                               |
 | src\main\java\core\config 	| Interface com as propriedades dos arquivos de ambiente 'Properties'                                       |
@@ -49,7 +49,7 @@ também customizar de acordo com sua necessidade.
 
 Abaixo está a lista de frameworks utilizados nesse projeto
 
-| Framework                    	| finalidade       	                                                                                        | 
+| Framework                    	| Finalidade       	                                                                                        | 
 |------------------------------	|---------------------------------------------------------------------------------------------------------- |
 | Jackson                  		| Responsável pela leitura de dados de arquivo yaml file                                                    |
 | Selenium                     	| Responsável pela interação com páginas web                                                                |
@@ -124,6 +124,24 @@ Exemplo:
         log.info(String.format("TESTE STATUS: %s",scenario.getStatus()));
     }
 ```
+
+## TIPOS DE TESTE
+
+Os tipos de teste são utilizados para serem classificados e executados de acordo com o ambiente, então podemos seguir a classificação abaixo;
+
+| Tipo                     |Tag        | Finalidade       	                                                                                        | 
+|------------------------- |---------- |----------------------------------------------------------------------------------------------------------  |
+| Smoke Testing            |@smoke     | Responsável por garantir que as funcionalidade principais do sistema está minimamente funcionado           |
+| Teste Funcional          |@funcional | Responsável por garantir que todos os critérios de aceite do sistema estão em conformidade com os requsitos|
+| Teste de Aceitação       |@aceitacao | Responsável por garantir que os fluxos funcionais da aplicação estão funcionando                           |
+
+Veja abaixo a tabela DE-PARA de tipo de teste / Tag versus ambiente.
+
+| Tipo                     |Tag        | Ambiente       	                                                                                        | 
+|------------------------- |---------- |------------------------------------------- |
+| Smoke Testing            |@smoke     | Develop, QA ou PreProd                     |
+| Teste Funcional          |@funcional | QA                                         |
+| Teste de Aceitação       |@aceitacao | PreProd                                    |
 
 ## COMANDOS PARA EXECUTAR OS TESTES
 
