@@ -131,11 +131,11 @@ Os tipos de teste são utilizados para serem classificados e executados de acord
 
 | Tipo                     |Tag        | Finalidade       	                                                                                        | 
 |------------------------- |---------- |----------------------------------------------------------------------------------------------------------  |
-| Smoke Testing            |@smoke     | Responsável por garantir que as funcionalidade principais do sistema está minimamente funcionado           |
+| Smoke Testing            |@smoke     | Responsável por garantir que as funcionalidade principais do sistema estão minimamente funcionado          |
 | Teste Funcional          |@funcional | Responsável por garantir que todos os critérios de aceite do sistema estão em conformidade com os requsitos|
 | Teste de Aceitação       |@aceitacao | Responsável por garantir que os fluxos funcionais da aplicação estão funcionando                           |
 
-Veja abaixo a tabela DE-PARA de tipo de teste / Tag versus ambiente.
+Veja abaixo a tabela DE-PARA de tipo de teste / tag versus ambiente.
 
 | Tipo                     |Tag        | Ambiente       	                                                                                        | 
 |------------------------- |---------- |------------------------------------------- |
