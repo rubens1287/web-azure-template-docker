@@ -24,7 +24,7 @@ public class AttachmentController extends GenericController{
 
         RequestSpecification httpRequest = given();
         httpRequest.contentType(ContentType.JSON);
-        httpRequest.header("Authorization", "Basic " +  LoginController.getToken(azureConfig.personalToken()));
+        httpRequest.header("Authorization", "Basic " +  LoginController.getToken());
 
         for (Iterator<Attachment> iterator = DriverManager.attachments.iterator(); iterator.hasNext();) {
             Attachment attachment = iterator.next();

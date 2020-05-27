@@ -23,6 +23,7 @@
 
 		<env>des</env> <!-- des, hom ou qa-->
 		<browser>chrome</browser> <!-- chrome, edge, firefox, iexplorer, opera, safari-->
+		<token></token>
 	</properties>
 
 	<build>
@@ -35,6 +36,7 @@
 					<systemPropertyVariables>
 						<env>${env}</env>
 						<browser>${browser}</browser>
+						<token>${token}</token>
 					</systemPropertyVariables>
 					<testFailureIgnore>true</testFailureIgnore>
 					<includes>

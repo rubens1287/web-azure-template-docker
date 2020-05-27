@@ -26,7 +26,7 @@ public class RunTestController extends GenericController  {
 
         RequestSpecification httpRequest = given();
         httpRequest.contentType(ContentType.JSON);
-        httpRequest.header("Authorization", "Basic " + LoginController.getToken(azureConfig.personalToken()));
+        httpRequest.header("Authorization", "Basic " + LoginController.getToken());
 
         List<ResultTestCase> resultTestCases = Collections.singletonList(
                 new ResultTestCase(getPointIdFromTestCase(scenario, tagsCucumber.getTestId()),
@@ -49,7 +49,7 @@ public class RunTestController extends GenericController  {
         CucumberController tagsCucumber = new CucumberController(scenario);
         RequestSpecification httpRequest = given();
         httpRequest.contentType(ContentType.JSON);
-        httpRequest.header("Authorization", "Basic " + LoginController.getToken(azureConfig.personalToken()));
+        httpRequest.header("Authorization", "Basic " + LoginController.getToken());
         String url = String.format("%s_apis/testplan/Plans/%s/Suites/%s/TestPoint?api-version=5.1-Preview&testCaseId=%s&includePointDetails=true&returnIdentityRef=true"
                 ,getBaseUrl(),tagsCucumber.getPlanId(), tagsCucumber.getSuiteId(),testId);
         Response response = httpRequest.get(url);
