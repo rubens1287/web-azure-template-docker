@@ -149,6 +149,15 @@ Veja abaixo a tabela DE-PARA de tipo de teste / tag versus ambiente.
 
 ## COMANDOS PARA EXECUTAR OS TESTES
 
+Parametros pré definidos
+
+| Parametro                |Valor                                            |  
+|------------------------- |------------------------------------------------ |
+| -Denv                    |des, hom, qa                                     |
+| -Dbrowser                |chrome, edge, firefox, iexplorer, opera, safari  |
+| -Dtoken                  |Personal access token azure devops               |
+| -Dcucumber.options       |tags, plugins, glues, features                   |
+
 Com o prompt de comando acesse a pasta do projeto, onde esta localizado o arquivo pom.xml, execute o comando abaixo para rodar os testes automatizados.
 
 ```
