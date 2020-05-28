@@ -76,8 +76,12 @@ host.azure = <Host do Servido>
 # Nome do Projeto
 project = <Nome do Projeto>
 
-# Token de acesso ao modulo test management com permisão de escrita e leitura
-personal.access.token = <Token do usuário do azure devops>
+```
+
+Você deve informar o seu personal access token no arquivo pom.xml
+
+```xml
+<token>personal-access-token</token>
 ```
 
 Para concluir a configuração, você deve aplicar as tags reservadas no arquivo de features do cucumber;

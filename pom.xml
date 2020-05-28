@@ -23,7 +23,7 @@
 
 		<env>des</env> <!-- des, hom ou qa-->
 		<browser>chrome</browser> <!-- chrome, edge, firefox, iexplorer, opera, safari-->
-		<token></token>
+		<token>nqh7zd6qbn7iki6iwnqsh4vtr7khqc323wlpa65ltxvgrhiuewxa</token>
 	</properties>
 
 	<build>
