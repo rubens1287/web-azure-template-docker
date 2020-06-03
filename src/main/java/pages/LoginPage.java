@@ -5,8 +5,8 @@ import core.azure.model.attachment.Attachment;
 import core.driver.DriverManager;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
-import support.Action;
-import support.Verifications;
+import support.selenium.Action;
+import support.selenium.Verifications;
 
 import java.util.HashMap;
 

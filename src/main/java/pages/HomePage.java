@@ -5,7 +5,7 @@ import core.azure.model.attachment.Attachment;
 import core.driver.DriverManager;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
-import support.Verifications;
+import support.selenium.Verifications;
 
 @Log4j2
 public class HomePage extends DriverManager implements CommonTestingType {

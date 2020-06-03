@@ -1,4 +1,4 @@
-package support;
+package support.selenium;
 
 import core.driver.DriverManager;
 import org.openqa.selenium.JavascriptExecutor;

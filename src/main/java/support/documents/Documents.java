@@ -1,4 +1,4 @@
-package core.documents;
+package support.documents;
 
 import lombok.extern.log4j.Log4j2;
 

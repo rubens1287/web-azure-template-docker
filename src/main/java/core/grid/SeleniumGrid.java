@@ -3,7 +3,7 @@ package core.grid;
 import core.driver.DriverManager;
 import io.restassured.specification.RequestSpecification;
 import lombok.extern.log4j.Log4j2;
-import support.Verifications;
+import support.selenium.Verifications;
 
 import static io.restassured.RestAssured.given;
 

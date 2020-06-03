@@ -1,8 +1,8 @@
 # language: pt
 # charset: UTF-8
 
-@PlanId=5
-@SuiteId=26
+@PlanId=181
+@SuiteId=183
 Funcionalidade: Login
    Eu como cliente gostaria de acessar o sistema via login somente com credenciais validas
 

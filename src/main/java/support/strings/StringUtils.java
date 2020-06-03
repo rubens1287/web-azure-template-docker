@@ -1,4 +1,4 @@
-package core.strings;
+package support.strings;
 
 import java.text.Normalizer;
 

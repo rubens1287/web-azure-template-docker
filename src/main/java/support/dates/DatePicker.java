@@ -1,4 +1,4 @@
-package core.dates;
+package support.dates;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

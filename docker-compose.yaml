@@ -30,9 +30,11 @@ services:
     environment:
       - PULL_SELENIUM_IMAGE=true
   teste:
+      volumes:
+        - ./target:/target
       build: .
       container_name: web-project-template-multi-cloud_teste
-      command: mvn clean test -Denv=qa
+      command: mvn test -Denv=qa
       network_mode: host
       depends_on:
          - zalenium
