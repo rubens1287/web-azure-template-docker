@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>br.com.gft</groupId>
-	<artifactId>web-project-template-multi-cloud</artifactId>
+	<artifactId>web-project-azure</artifactId>
 	<version>1.0</version>
 
 	<properties>

@@ -33,7 +33,7 @@ services:
       volumes:
         - ./target:/target
       build: .
-      container_name: web-project-template-multi-cloud_teste
+      container_name: web-project-azure_teste
       command: mvn test -Denv=qa
       network_mode: host
       depends_on:
