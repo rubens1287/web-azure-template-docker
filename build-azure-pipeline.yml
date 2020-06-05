@@ -8,8 +8,8 @@ steps:
 - task: Docker@2
   displayName: buildAndPush
   inputs:
-    containerRegistry: 'service-containers'
-    repository: 'testes-exemplo'
+    containerRegistry: 'azurecontainers'
+    repository: 'front-end'
     tags: |
      $(Build.BuildId)
      latest
