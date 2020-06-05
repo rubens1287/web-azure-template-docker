@@ -23,7 +23,7 @@
 
 		<env>des</env> <!-- des, hom ou qa-->
 		<browser>chrome</browser> <!-- chrome, edge, firefox, iexplorer, opera, safari-->
-		<token>tnt5opfpegrrqdqqw7f6e4iimu4ssngbnqqgbm34p66v34hssngq</token> <!-- Token de acesso ao modulo test management com permissão de escrita e leitura -->
+		<token></token> <!-- Token de acesso ao modulo test management com permissão de escrita e leitura -->
     </properties>
 
 	<build>
