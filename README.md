@@ -7,37 +7,37 @@ Projeto desenvolvido com proposito de ser um modelo base para teste de interface
 
 Requisitos de software necessários para o ambiente de desenvolvimento:
 
-*   Docker 
 *   Java 1.8 SDK
-*   Maven 3.5.*
 *   Navegador Web (Chrome, Opera, FireFox, Edge ou Safari)
 *   Intellij IDEA Community
 *   Plugins do Intellij
     * Cumcuber for java
     * Lombok
     * Ideolog 
+*   Maven 3.5.*
+*   Docker 
     
 ## ESTRUTURA DO PROJETO
 
-| Diretório                    	| Finalidade       	                                                                                        | 
-|------------------------------	|---------------------------------------------------------------------------------------------------------- |
-| src\main\java\core\azure 		| Responsável por enviar os resultados para o test management do Azure Devops                               |
-| src\main\java\core\config 	| Interface com as propriedades dos arquivos de ambiente 'Properties'                                       |
-| src\main\java\core\data    	| Reponsável por ler arquivos yaml file e retonar objeto HashMap com os valores dos campos                  |
-| src\main\java\core\dates 		| Metodos de suporte para trabalhar com datas                                                              	|
-| src\main\java\core\documents	| Responsável gerar CPFs sintéticos e validos                                                              	|
-| src\main\java\core\driver 	| Responsável por fabricar os drivers para rodar local e remoto para varios navegadores                    	|
-| src\main\java\core\strings 	| Responsável por fazer tratamentos em string                                                             	|
-| src\main\java\core\grid    	| Responsável por interagir com o grid do selenium                                                         	|
-| src\main\java\pages			| Local onde deve ser criado as pages objects para facilitar a manutenção do projeto                       	|
-| src\main\java\model			| Responsável por organizar os objetos modelos utilizado no suporte dos scripts de teste               		|
-| src\main\java\support			| Metodos de suporte a interação com os elementos web fazendo ações de click e esperas explicitas          	|
-| src\main\resources\conf	    | Arquivos de configuração segregados por ambiente                                                        	|
-| src\test\java\hooks          	| Metodos que executam antes e depois de cada teste (@Before, @After)                                   	|
-| src\test\java\runner         	| Metodo prinicipal que inicia os testes via cucumber                                                      	|
-| src\test\java\steps         	| Local onde deve ser criado as classes que representam os steps definition do cucumber                    	|
-| src\test\resources\data       | Massa de dados segregada por ambiente, escritos em arquivos yaml                                      	|
-| src\test\resources\features 	| Funcionalidade e cenários de teste escritos em linguagem DSL (Gherkin language)                        	|   
+| Diretório                    	  | Finalidade       	                                                                                        | 
+|-------------------------------- |---------------------------------------------------------------------------------------------------------- |
+| src\main\java\core\azure 		  | Responsável por enviar os resultados para o test management do Azure Devops                               |
+| src\main\java\support\data      | Reponsável por ler arquivos yaml file e retonar objeto HashMap com os valores dos campos                  |
+| src\main\java\core\config 	  | Interface com as propriedades dos arquivos de ambiente 'Properties'                                       |
+| src\main\java\core\driver 	  | Responsável por fabricar os drivers para rodar local e remoto para varios navegadores                     |
+| src\main\java\core\strings 	  | Responsável por fazer tratamentos em string                                                               |
+| src\main\java\core\grid    	  | Responsável por interagir com o grid do selenium                                                          |
+| src\main\java\pages			  | Local onde deve ser criado as pages objects para facilitar a manutenção do projeto                        |
+| src\main\java\model			  | Responsável por organizar os objetos modelos utilizado no suporte dos scripts de teste               	  |
+| src\main\java\support\selenium  | Metodos de suporte a interação com os elementos web fazendo ações de click e esperas explicitas           |
+| src\main\java\support\dates 	  | Metodos de suporte para trabalhar com datas                                                               |
+| src\main\java\support\documents | Responsável gerar CPFs sintéticos e validos                                                               |
+| src\main\resources\conf	      | Arquivos de configuração segregados por ambiente                                                          |
+| src\test\java\hooks          	  | Metodos que executam antes e depois de cada teste (@Before, @After)                                   	  |
+| src\test\java\runner         	  | Metodo prinicipal que inicia os testes via cucumber                                                       |
+| src\test\java\steps         	  | Local onde deve ser criado as classes que representam os steps definition do cucumber                     |
+| src\test\resources\data         | Massa de dados segregada por ambiente, escritos em arquivos yaml                                      	  |
+| src\test\resources\features 	  | Funcionalidade e cenários de teste escritos em linguagem DSL (Gherkin language)                        	  |   
     
 ## DOWNLOAD DO PROJETO TEMPLATE PARA SUA MÁQUINA LOCAL
 
@@ -183,13 +183,15 @@ significa que tudo que é necessário para a execução é criado dentro de cont
 Configure o arquivo <b>"docker-compose.yml"</b>
 
 ```yaml
-  teste:
-      build: .
-      container_name: <nome do projeto no artifactId do pom>_teste
-      command: <Comando de execução do projeto, vide item (COMANDOS PARA EXECUTAR OS TESTES)>
-      network_mode: host
-      depends_on:
-         - zalenium
+    teste:
+        volumes:
+          - ./target:/target
+        build: .
+        container_name: <nome do projeto no artifactId do pom>_teste
+        command: <Comando de execução do projeto, vide item (COMANDOS PARA EXECUTAR OS TESTES)>
+        network_mode: host
+        depends_on:
+           - zalenium
 ```
 
 ## TESTES CONTINUOS

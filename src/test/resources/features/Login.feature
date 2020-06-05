@@ -1,12 +1,12 @@
 # language: pt
 # charset: UTF-8
 
-@PlanId=181
-@SuiteId=183
+@PlanId=1
+@SuiteId=4
 Funcionalidade: Login
    Eu como cliente gostaria de acessar o sistema via login somente com credenciais validas
 
-  @TestId=7
+  @TestId=6
   @smoke
   @aceitacao
    Cenario: Executar login com credenciais validas
@@ -14,7 +14,7 @@ Funcionalidade: Login
     Quando eu efetuar o login com credencias validas
     Entao sera apresentado a tela do menu principal
 
-  @TestId=23
+  @TestId=7
   @funcional
   @aceitacao
   Cenario:  Executar login com credenciais invalido
