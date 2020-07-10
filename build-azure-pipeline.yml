@@ -9,7 +9,7 @@ steps:
   displayName: buildAndPush
   inputs:
     containerRegistry: 'docker-hub-containers'
-    repository: 'front-end'
+    repository: 'rubenslobo/front-end'
     tags: |
      $(Build.BuildId)
      latest
