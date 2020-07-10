@@ -6,16 +6,9 @@ steps:
   displayName: 'Install Docker 17.09.0-ce'
 
 - task: Docker@2
-  displayName: 'Login docker private azure'
-  inputs:
-    containerRegistry: azurecontainers
-    command: login
-
-
-- task: Docker@2
   displayName: buildAndPush
   inputs:
-    containerRegistry: 'azurecontainers'
+    containerRegistry: 'docker-hub-containers'
     repository: 'front-end'
     tags: |
      $(Build.BuildId)
