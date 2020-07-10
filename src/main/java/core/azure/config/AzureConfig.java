@@ -11,4 +11,7 @@ public interface AzureConfig extends Config {
     @Key("project")
     String project();
 
+    @Key("organization")
+    String organization();
+
 }
