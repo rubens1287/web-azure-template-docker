@@ -40,7 +40,7 @@ public class DriverManager {
 
     public static void quit(Scenario scenario) {
         if (scenario.isFailed()) {
-            attachments.add(new Attachment("Evidencia do erro apresentado na execução"));
+            attachments.add(new Attachment("png","Evidencia do erro apresentado na execução"));
         }
         DriverManager.driver.get().quit();
     }

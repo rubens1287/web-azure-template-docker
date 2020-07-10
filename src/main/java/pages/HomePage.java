@@ -14,7 +14,7 @@ public class HomePage extends DriverManager implements CommonTestingType {
 
     @Override
     public boolean isPresent() {
-        attachments.add(new Attachment());
+        attachments.add(new Attachment("png",null));
         return Verifications.verifyElementIsVisible(lblBemVindo);
     }
 }

@@ -1,9 +1,7 @@
 package core.azure.controller;
 
-import core.azure.model.attachment.Attachment;
 import core.azure.model.testresult.Results;
 import core.azure.model.testresult.ResultTestCase;
-import core.driver.DriverManager;
 import cucumber.api.Scenario;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -24,36 +22,56 @@ public class RunTestController extends GenericController  {
         String url = String.format("%s_apis/testplan/Plans/%s/Suites/%s/TestPoint?api-version=5.1-Preview&includePointDetails=true&returnIdentityRef=true"
                 , getBaseUrl(), tagsCucumber.getPlanId(), tagsCucumber.getSuiteId());
 
-        RequestSpecification httpRequest = given();
-        httpRequest.contentType(ContentType.JSON);
-        httpRequest.header("Authorization", "Basic " + LoginController.getToken());
+        LoginController loginController = new LoginController();
+        loginController.generateToken();
 
-        List<ResultTestCase> resultTestCases = Collections.singletonList(
-                new ResultTestCase(getPointIdFromTestCase(scenario, tagsCucumber.getTestId()),
-                        new Results(CucumberController.getStatus(scenario))));
+        if( !loginController.getToken().isEmpty()) {
+            try {
+                RequestSpecification httpRequest = given();
+                httpRequest.contentType(ContentType.JSON);
+                httpRequest.header("Authorization", "Basic " + loginController.getToken());
 
-        httpRequest.body(resultTestCases);
+                List<ResultTestCase> resultTestCases = Collections.singletonList(
+                        new ResultTestCase(getPointIdFromTestCase(scenario, tagsCucumber.getTestId(), loginController.getToken()),
+                                new Results(CucumberController.getStatus(scenario))));
 
-        Response response = httpRequest.patch(url);
+                httpRequest.body(resultTestCases);
 
-        if(response.getStatusCode()==200){
-            log.info("Execução registrada com sucesso");
-            AttachmentController attachmentController = new AttachmentController();
-            attachmentController.addAttachment(response, scenario);
-        }else{
-            log.error("Erro ao tentar registrar execução do teste", response.getBody().print());
+                Response response = httpRequest.patch(url);
+
+                if (response.getStatusCode() == 200) {
+                    log.info("Execução registrada com sucesso");
+                    AttachmentController attachmentController = new AttachmentController();
+                    attachmentController.addAttachment(response, scenario, loginController.getToken());
+                } else {
+                    log.error("Erro ao tentar registrar execução do teste", response.getBody().print());
+                }
+            }catch (Exception e){
+                log.error("Erro ao tentar registrar execução do teste", e.getMessage());
+            }
+        }else {
+            log.warn("Personal access token não informado!");
         }
+
+
     }
 
-    private Integer getPointIdFromTestCase(Scenario scenario, String testId){
+    private Integer getPointIdFromTestCase(Scenario scenario, String testId, String token){
+        Response response;
+
         CucumberController tagsCucumber = new CucumberController(scenario);
         RequestSpecification httpRequest = given();
         httpRequest.contentType(ContentType.JSON);
-        httpRequest.header("Authorization", "Basic " + LoginController.getToken());
+        httpRequest.header("Authorization", "Basic " + token);
         String url = String.format("%s_apis/testplan/Plans/%s/Suites/%s/TestPoint?api-version=5.1-Preview&testCaseId=%s&includePointDetails=true&returnIdentityRef=true"
-                ,getBaseUrl(),tagsCucumber.getPlanId(), tagsCucumber.getSuiteId(),testId);
-        Response response = httpRequest.get(url);
-        return response.jsonPath().get("value.id[0]");
+                , getBaseUrl(), tagsCucumber.getPlanId(), tagsCucumber.getSuiteId(), testId);
+        response = httpRequest.get(url);
+        if(response.getStatusCode() == 200){
+            return response.jsonPath().get("value.id[0]");
+        }else {
+            log.error("Erro ao tentar recuperar o Ponit id do caso de teste! Response code: " +response.getStatusCode());
+            return null;
+        }
     }
 
 }

@@ -16,7 +16,7 @@ import static io.restassured.RestAssured.given;
 public class AttachmentController extends GenericController{
 
 
-    public void addAttachment(Response response, Scenario scenario){
+    public void addAttachment(Response response, Scenario scenario, String token){
 
         log.info("Preparando para enviar as evidências para o Test Management do Azure Devosp");
         String url = String.format("%s_apis/test/Runs/%s/Results/100000/attachments?api-version=5.1-preview"
@@ -24,7 +24,7 @@ public class AttachmentController extends GenericController{
 
         RequestSpecification httpRequest = given();
         httpRequest.contentType(ContentType.JSON);
-        httpRequest.header("Authorization", "Basic " +  LoginController.getToken());
+        httpRequest.header("Authorization", "Basic " +  token);
 
         for (Iterator<Attachment> iterator = DriverManager.attachments.iterator(); iterator.hasNext();) {
             Attachment attachment = iterator.next();

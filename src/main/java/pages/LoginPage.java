@@ -27,20 +27,20 @@ public class LoginPage extends DriverManager implements CommonTestingType {
 
     public void acessaAplicacao(){
         getDriver().get(configuration.url());
-        attachments.add(new Attachment());
+        attachments.add(new Attachment("png",null));
         log.info("Acesso a aplicacao efetuado com sucesso");
     }
 
     public void executaLogin(HashMap data){
         Action.setText(txtUsuario,data.get("usuario"));
         getDriver().findElement(txtSenha).sendKeys((CharSequence) data.get("senha"));
-        attachments.add(new Attachment());
+        attachments.add(new Attachment("png",null));
         Action.clickOnElement(btnEntrar);
         log.info("Login na aplicacao efetuado com sucesso");
     }
 
     public boolean isErrorMsg(){
-        attachments.add(new Attachment());
+        attachments.add(new Attachment("png",null));
         return Verifications.verifyElementIsClickable(lblErrorMsg);
     }
 

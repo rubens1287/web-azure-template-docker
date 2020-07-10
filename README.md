@@ -78,7 +78,7 @@ project = <Nome do Projeto>
 
 ```
 
-Você deve informar o seu personal access token no arquivo pom.xml
+Você deve informar o seu personal access token no arquivo pom.xml, caso você não queira integrar as ferramentas basta deixar esse parametro sem valor.
 
 ```xml
 <token>personal-access-token</token>
@@ -87,9 +87,11 @@ Você deve informar o seu personal access token no arquivo pom.xml
 Para concluir a configuração, você deve aplicar as tags reservadas no arquivo de features do cucumber;
 
 ```gherkin
-@PlanId=<Id do plano de teste no azure>
-@SuiteId=<Id do suite de teste no azure>
-@TestId=<Id do caso de teste no azure>
+@Plan_Id=<Id do plano de teste no azure>
+@Qa_Suite_Id=<Id do suite de teste no azure para regressão da suite de teste de qa>
+@Hom_Suite_Id=<Id do suite de teste no azure para regressão da suite de teste de homologação>
+@Des_Suite_Id=<Id do suite de teste no azure para regressão da suite de teste de desenvolvimento>
+@Test_Id=<Id do caso de teste no azure>
 ```
 
 Exemplo:
@@ -98,13 +100,17 @@ Exemplo:
 # language: pt
 # charset: UTF-8
 
-@PlanId=5
-@SuiteId=9
+@Plan_Id=69226
+@Des_Suite_Id=69235
+@Qa_Suite_Id=69233
+@Hom_Suite_Id=69234
 Funcionalidade: Login
    Eu como cliente gostaria de acessar o sistema via login somente com credenciais validas
 
-  @TestId=7
-   Cenario: CT001 - Login - Executar login com valido
+  @Test_Id=69230
+  @smoke
+  @aceitacao
+   Cenario: Executar login com credenciais validas
     Dado eu estou na pagina de login
     Quando eu efetuar o login com credencias validas
     Entao sera apresentado a tela do menu principal

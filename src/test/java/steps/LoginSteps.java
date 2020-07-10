@@ -1,7 +1,9 @@
 package steps;
 
 import core.data.DataYaml;
+import cucumber.api.PendingException;
 import cucumber.api.java.pt.Dado;
+import cucumber.api.java.pt.E;
 import cucumber.api.java.pt.Entao;
 import cucumber.api.java.pt.Quando;
 
@@ -41,4 +43,5 @@ public class LoginSteps {
     public void seraApresentadoUmaMensagemDeErro() throws Throwable {
        Assert.assertTrue(loginPage.isErrorMsg());
     }
+
 }

@@ -1,5 +1,6 @@
 package core.azure.controller;
 
+import core.driver.DriverManager;
 import cucumber.api.Scenario;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,12 +18,13 @@ public class CucumberController {
         List<String> tags = (List<String>) scenario.getSourceTagNames();
         for (int i = 0; i < tags.size(); i++) {
             String value = tags.get(i).toUpperCase();
-            if(value.contains("SUITEID") ){
-                this.suiteId = tags.get(i).toUpperCase().replace("@SUITEID=","");
-            }else if(value.contains("TESTID")){
-                this.testId = tags.get(i).toUpperCase().replace("@TESTID=","");
-            }else if(value.contains("PLANID")){
-                this.planId = tags.get(i).toUpperCase().replace("@PLANID=","");
+            String env = System.getProperty("env").toUpperCase();
+            if(value.contains(env+"_SUITE_ID") ){
+                this.suiteId = tags.get(i).toUpperCase().replace("@"+env+"_SUITE_ID=","");
+            }else if(value.contains("TEST_ID")){
+                this.testId = tags.get(i).toUpperCase().replace("@TEST_ID=","");
+            }else if(value.contains("PLAN_ID")){
+                this.planId = tags.get(i).toUpperCase().replace("@PLAN_ID=","");
             }
         }
     }
