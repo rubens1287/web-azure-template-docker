@@ -7,7 +7,7 @@ Projeto desenvolvido com proposito de ser um modelo base para teste de interface
 
 Requisitos de software necessários para o ambiente de desenvolvimento:
 
-*   Java 1.8 SDK
+*   Java 11 JDK
 *   Navegador Web (Chrome, Opera, FireFox, Edge ou Safari)
 *   Intellij IDEA Community
 *   Plugins do Intellij

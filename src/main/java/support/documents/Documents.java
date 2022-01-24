@@ -5,8 +5,6 @@ import lombok.extern.log4j.Log4j2;
 import javax.swing.text.MaskFormatter;
 import java.util.ArrayList;
 
-import static sun.util.calendar.CalendarUtils.mod;
-
 /**
  * @author Rubens Lobo
  * @since 17/07/2018
